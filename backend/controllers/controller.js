@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { findById } = require("../model/todo.js")
+
 
 const Todo = require("../model/todo.js")
 
@@ -12,8 +12,7 @@ exports.createTodo = async (req,res)=>{
         }
         else{
             const user = await Todo.create({
-                title:title,
-                tasks:tasks
+                title:title
             })
     
             res.status(200).json({user})
@@ -59,8 +58,7 @@ exports.getAllTodos=async (req,res)=>{
         const user = await Todo.find()
 
         res.status(200).json({
-            message:"success",
-            user
+        user
         })
     }
 
@@ -78,8 +76,8 @@ exports.deleteTasks = async (req,res)=>{
     try{
 
         const {id} = req.params
+        const {tasks} = req.body.body
 
-        const {tasks} = req.body
 
         const user = await Todo.findById(id)
 
@@ -114,9 +112,6 @@ exports.updateTasks=async (req,res)=>{
     
     const {tasks,index} = req.body
 
-    console.log(id)
-    console.log(tasks,index)
-
     const user = await Todo.findById(id)
 
     user.tasks[index] = tasks
@@ -145,6 +140,14 @@ exports.deleteTodo =async (req,res)=>{
             message:"unable to find the todo"
         })
     }
+}
+
+exports.getTodo = async (req,res)=>{
+    const {id} = req.params
+    const user = await Todo.findById(id)
+    res.status(200).json({
+        user
+    })
 }
 
 

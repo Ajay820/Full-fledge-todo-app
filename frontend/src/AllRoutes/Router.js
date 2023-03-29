@@ -10,7 +10,7 @@ export const Router = () => {
     <Routes>
         <Route path="/" element={<CreateTodo />}></Route>
         <Route path="/getalltodos" element={<AllTodos />}></Route>
-        <Route path="/addtask/:id" element={<AddTask />}></Route>
+        <Route path="/createTask/:id" element={<AddTask />}></Route>
     </Routes>
   )
 }
