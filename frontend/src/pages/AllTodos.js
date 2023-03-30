@@ -22,7 +22,7 @@ export const AllTodos =  () => {
 
   useEffect(()=>{
     getAllTodos()
-  },[])
+  },[user])
 
 
 
@@ -41,7 +41,7 @@ export const AllTodos =  () => {
 
   return (
     <div className="w-2/4 mx-auto m-10">
-      {user.map((user)=>(
+      {user && user.map((user)=>(
           <div key={user._id} className="m-3">
             <input type="text" className="text-2xl rounded-xl p-1 mt-2" value={user.title}/>
             <button onClick={()=>{addTask(user._id)}} className="ml-3 text-xl rounded-xl bg-green-600 p-1">Add Task</button>

@@ -117,8 +117,6 @@ exports.updateTasks=async (req,res)=>{
     user.tasks[index] = tasks
 
     user.save()
-
-    console.log(user)
  }
 
 exports.deleteTodo =async (req,res)=>{

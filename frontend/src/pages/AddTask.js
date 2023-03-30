@@ -25,7 +25,9 @@ export const AddTask = () => {
    const getTodo = async ()=>{
     const resp = await axios.get(`/getTodo/${id}`)
 
+
     setTodo(resp.data.user.tasks)
+
     setTitle(resp.data.user.title)
 
    }
@@ -33,7 +35,7 @@ export const AddTask = () => {
    
   useEffect(()=>{
     getTodo()
-  },[])
+  },[todo])
 
 
   const addTask = async (e) =>{
@@ -42,8 +44,9 @@ export const AddTask = () => {
     if(ans.length > 0){
       const body ={
         tasks:ans
-      }  
+      } 
 
+  
       const resp = await axios.post(`/createTask/${id}`, body)
       setAns("")
     }
@@ -64,9 +67,12 @@ export const AddTask = () => {
     const body ={ 
       index:index,
       tasks:edit
-    }
-    const resp = await axios.put(`/updatetask/${id}`,body)
-    console.log(resp)
+    } 
+    
+      const resp = await axios.put(`/updatetask/${id}`,body)
+      console.log(resp)
+    
+
     }
 
     else{
@@ -83,7 +89,6 @@ export const AddTask = () => {
     }
 
     const resp = await axios.delete(`/deletetask/${id}`,{data:{body:body}})
-
     console.log(resp)
 
   }
@@ -100,14 +105,16 @@ export const AddTask = () => {
 
   return (
     <div className="w-3/4 m-5 mx-auto">
-      <div >
+      <div>
         <form onSubmit={addTask} className="w-2/5 mx-auto">
           <h1 className="text-5xl mb-5 text-white text-center">{title}</h1>
           <input type="text" value ={ans} className="text-3xl rounded-xl p-1" onChange={(e)=>{setAns(e.target.value)}} />
           <button className="text-xl ml-2 bg-green-400 p-1 rounded-xl">Add Task</button>
         </form>
+    
         <div className="mx-auto w-2/5 m-2">
-          {todo.map((task,index)=>(
+
+          {todo && todo.map((task,index)=>(
             <div key={index} className="m-5">
               <input value={task} className="text-2xl rounded-xl p-2"/>
               <button onClick={()=>{value(index)}} className="ml-2 text-xl bg-green-400 p-2 rounded-xl">Edit</button>
